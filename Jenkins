@@ -1,0 +1,29 @@
+pipeline {
+  agent any
+
+  tools {
+    maven 'maven-3.6.3'
+  }
+
+  stages {
+    stage('GIT Checkout'){
+      steps{
+        checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+      doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg:
+      [], userRemoteConfigs: [[url: 'https://github.com/L00092054/Maven_Jenkins_pipeline.git']]])
+      }
+    }  
+      stage ('Build') {
+        steps {
+          sh 'mvn -f TestHelloWorld/pom.xml clean install'
+          
+        }
+      }
+      
+      stage ('Run Tests') {
+        steps {  
+          sh 'mvn -f  TestHelloWorld/pom.xml test'
+        }
+      }
+    }
+}

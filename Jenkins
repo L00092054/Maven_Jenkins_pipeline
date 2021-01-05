@@ -15,14 +15,14 @@ pipeline {
     }  
       stage ('Build') {
         steps {
-          sh 'mvn -f TestHelloWorld/pom.xml clean install'
+          sh 'mvn -f Maven_Jenkins/pom.xml clean install'
           
         }
       }
       
       stage ('Run Tests') {
         steps {  
-          sh 'mvn -f  TestHelloWorld/pom.xml test'
+          sh 'mvn -f  Maven_Jenkins/pom.xml test'
         }
       }
     }
